@@ -13,7 +13,7 @@ import android.view.View
 class BasketballField : View {
     private lateinit var paint: Paint
     private val BORDER_COLOR = Color.BLACK
-    private val BORDER_WIDTH = 10F
+    private val BORDER_WIDTH = 8F
 
     constructor(context: Context?) : super(context){
         init(null)
@@ -38,13 +38,13 @@ class BasketballField : View {
             paint.style = Paint.Style.STROKE
             paint.strokeWidth = BORDER_WIDTH
             //main frame
-            drawRect(0F, 0F, measuredWidth.toFloat(), measuredHeight.toFloat(), paint)
+            drawRect(0F, 0F, measuredWidth.toFloat(), measuredWidth.times(0.93).toFloat(), paint)
             //inner frame
             drawRect(measuredWidth.times(0.65).toFloat(), 0F, measuredWidth.times(0.35).toFloat(), measuredHeight.times(0.40).toFloat(), paint)
             //middle circle
-            drawCircle(measuredWidth.times(0.50).toFloat(), measuredHeight.toFloat(), 125F, paint)
+            drawCircle(measuredWidth.times(0.50).toFloat(), measuredHeight.toFloat(), measuredWidth.times(0.125).toFloat(), paint)
             //inner circle
-            drawCircle(measuredWidth.times(0.50).toFloat(), measuredHeight.times(0.40).toFloat(), 125F, paint)
+            drawCircle(measuredWidth.times(0.50).toFloat(), measuredHeight.times(0.40).toFloat(), measuredWidth.times(0.125).toFloat(), paint)
             //inner lines
             drawLine(measuredWidth.times(0.10).toFloat(), 0F, measuredWidth.times(0.10).toFloat(), measuredHeight.times(0.20).toFloat(), paint)
             drawLine(measuredWidth.times(0.90).toFloat(), 0F, measuredWidth.times(0.90).toFloat(), measuredHeight.times(0.20).toFloat(), paint)
@@ -52,6 +52,7 @@ class BasketballField : View {
             drawArc(measuredWidth.times(0.10).toFloat(), -measuredHeight.times(0.25).toFloat(), measuredWidth.times(0.90).toFloat(), measuredHeight.times(0.60).toFloat(), 0F, 180F, false, paint)
             //basket
             drawRect(measuredWidth.times(0.45).toFloat(), measuredHeight.times(0.086).toFloat(), measuredWidth.times(0.55).toFloat(), measuredHeight.times(0.086).toFloat(), paint)
+            drawCircle(2.43F, 5.919F, measuredWidth.times(0.010).toFloat(), paint)
         }
     }
 }
