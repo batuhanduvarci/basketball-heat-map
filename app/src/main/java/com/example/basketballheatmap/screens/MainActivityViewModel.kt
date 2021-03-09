@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 @ActivityScoped
 class MainActivityViewModel : ViewModel() {
     private var _response = MutableLiveData<ShotsResponseModel>()
-    val rasponse : LiveData<ShotsResponseModel> get() = _response
+    val response : LiveData<ShotsResponseModel> get() = _response
 
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> get() = _isLoading
