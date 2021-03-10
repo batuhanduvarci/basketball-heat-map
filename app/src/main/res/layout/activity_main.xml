@@ -38,6 +38,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="Player 1"
+                    style="@style/TitleStyle"
+                    android:layout_marginTop="16dp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/successRateTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="87"
+                    style="@style/TitleStyle"
+                    android:layout_marginTop="16dp"/>
+
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
 

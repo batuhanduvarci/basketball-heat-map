@@ -48,6 +48,14 @@ class MainActivity : AppCompatActivity() {
             drawHexagon(it)
         })
 
+        mainActivityViewModel.userData.observe(this, {
+            binding.nameTextView.text = String.format(getString(R.string.player_name_text), it.name, it.surname)
+        })
+
+        mainActivityViewModel.successRate.observe(this, {
+            binding.successRateTextView.text = String.format(getString(R.string.success_rate_text), it)
+        })
+
         mainActivityViewModel.isLoading.observe(this, {
             when(it){
                 true -> showLoading(supportFragmentManager)
