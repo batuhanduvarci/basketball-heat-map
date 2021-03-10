@@ -5,7 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basketballheatmap.common.messages.ShotsResponseModel
+import com.example.basketballheatmap.common.models.DataModel
+import com.example.basketballheatmap.common.models.HoneyCombModel
+import com.example.basketballheatmap.common.models.ShotModel
 import com.example.basketballheatmap.service.ServiceInstance
+import com.example.basketballheatmap.utils.CellUtils
 import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.launch
 
@@ -14,16 +18,30 @@ import kotlinx.coroutines.launch
  */
 @ActivityScoped
 class MainActivityViewModel : ViewModel() {
-    private var _response = MutableLiveData<ShotsResponseModel>()
-    val response : LiveData<ShotsResponseModel> get() = _response
+    private lateinit var shotsResponseModel : ShotsResponseModel
 
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> get() = _isLoading
 
-    fun getShotsData(){
+    private var _honeyCombList = MutableLiveData<ArrayList<HoneyCombModel>>()
+    val honeyCombList : LiveData<ArrayList<HoneyCombModel>> get() = _honeyCombList
+
+    fun getShotsData(player : Int){
         viewModelScope.launch {
             _isLoading.value = true
-            _response.value = ServiceInstance.serviceApiInstance.getShots()
+            shotsResponseModel = ServiceInstance.serviceApiInstance.getShots()
+            calculateCells(shotsResponseModel.data[player - 1].shots)
+        }
+    }
+
+    private fun calculateCells(shotsData: List<ShotModel>) {
+        viewModelScope.launch {
+            for (shot in shotsData){
+                CellUtils.calculateCoordinates(shot)
+            }
+            CellUtils.calculateHoneyCombDensity()
+            _honeyCombList.value = CellUtils.honeyCombModelList
+            _isLoading.value = false
         }
     }
 }
