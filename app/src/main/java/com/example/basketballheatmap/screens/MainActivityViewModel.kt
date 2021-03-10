@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.basketballheatmap.common.messages.ShotsResponseModel
-import com.example.basketballheatmap.common.models.DataModel
-import com.example.basketballheatmap.common.models.HoneyCombModel
+import com.example.basketballheatmap.common.models.HexagonModel
 import com.example.basketballheatmap.common.models.ShotModel
 import com.example.basketballheatmap.common.models.UserModel
 import com.example.basketballheatmap.service.ServiceInstance
@@ -25,8 +24,8 @@ class MainActivityViewModel : ViewModel() {
     private var _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> get() = _isLoading
 
-    private var _honeyCombList = MutableLiveData<ArrayList<HoneyCombModel>>()
-    val honeyCombList : LiveData<ArrayList<HoneyCombModel>> get() = _honeyCombList
+    private var _hexagonList = MutableLiveData<ArrayList<HexagonModel>>()
+    val hexagonList : LiveData<ArrayList<HexagonModel>> get() = _hexagonList
 
     private var _userData = MutableLiveData<UserModel>()
     val userData : LiveData<UserModel> get() = _userData
@@ -48,8 +47,9 @@ class MainActivityViewModel : ViewModel() {
             for (shot in shotsData){
                 CellUtils.calculateCoordinates(shot)
             }
-            CellUtils.calculateHoneyCombDensity()
-            _honeyCombList.value = CellUtils.honeyCombModelList
+            CellUtils.calculateHexagonDensity()
+            _hexagonList.value = CellUtils.hexagonModelList
+            CellUtils.hexagonModelList.clear()
             _successRate.value = PlayerUtils.calculateSuccessRate(shotsData)
             _isLoading.value = false
         }

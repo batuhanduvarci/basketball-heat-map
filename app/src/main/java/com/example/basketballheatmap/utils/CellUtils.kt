@@ -1,7 +1,7 @@
 package com.example.basketballheatmap.utils
 
 import android.graphics.Color
-import com.example.basketballheatmap.common.models.HoneyCombModel
+import com.example.basketballheatmap.common.models.HexagonModel
 import com.example.basketballheatmap.common.models.ShotModel
 import com.example.basketballheatmap.screens.MainActivity
 import kotlin.math.abs
@@ -14,7 +14,7 @@ object CellUtils {
 
     var imageHeight = 0
 
-    var honeyCombModelList = arrayListOf<HoneyCombModel>()
+    var hexagonModelList = arrayListOf<HexagonModel>()
 
     fun calculateCoordinates(shot: ShotModel) {
         val measuredPosX = (shot.shotPosX * imageWidth) / MainActivity.BASKETBALL_FIELD_WIDTH
@@ -28,42 +28,42 @@ object CellUtils {
             else -> measuredPosY
         }
         if (scaledPosX in 0.0..imageWidth.toDouble()) {
-            honeyCombModelList.add(HoneyCombModel(scaledPosX, scaledPosY, inOut = shot.inOut))
+            hexagonModelList.add(HexagonModel(id = shot.id, positionX = scaledPosX, positionY = scaledPosY, inOut = shot.inOut))
         }
     }
 
-    fun calculateHoneyCombDensity() {
-        for (honeyComb in honeyCombModelList) {
-            for (honeyCombToCompare in honeyCombModelList){
-                if (honeyComb.positionX == honeyCombToCompare.positionX && honeyComb.positionY == honeyCombToCompare.positionY){
-                    honeyComb.density++
+    fun calculateHexagonDensity() {
+        for (hexagon in hexagonModelList) {
+            for (hexagonToCompare in hexagonModelList){
+                if (hexagon.positionX == hexagonToCompare.positionX && hexagon.positionY == hexagonToCompare.positionY){
+                    hexagon.density++
                 }
             }
             //Bu fonksiyon birebir objeleri karşılaştırdığı için eksik sonuç verdi.Bu yüzden farklı yöntem kullandım
             //honeyComb.density = Collections.frequency(honeyCombModelList, honeyComb)
         }
-        for (honeyComb in honeyCombModelList){
-            honeyComb.color = calculateColor(honeyComb)
+        for (hexagon in hexagonModelList){
+            hexagon.color = calculateColor(hexagon)
         }
     }
 
-    private fun calculateColor(honeyCombModel: HoneyCombModel): Int {
-        val repeatingList = arrayListOf<HoneyCombModel>()
+    private fun calculateColor(hexagonModel: HexagonModel): Int {
+        val repeatingList = arrayListOf<HexagonModel>()
         var inCount = 0.0
 
-        for (honeyComb in honeyCombModelList){
-            if (honeyComb.positionX == honeyCombModel.positionX && honeyComb.positionY == honeyCombModel.positionY){
-                repeatingList.add(honeyComb)
+        for (hexagon in hexagonModelList){
+            if (hexagon.positionX == hexagonModel.positionX && hexagon.positionY == hexagonModel.positionY){
+                repeatingList.add(hexagon)
             }
         }
 
-        for (honeyComb in repeatingList){
-            if (honeyComb.inOut){
+        for (hexagon in repeatingList){
+            if (hexagon.inOut){
                 inCount++
             }
         }
 
-        val successRate = (inCount / honeyCombModel.density).times(100)
+        val successRate = (inCount / hexagonModel.density).times(100)
 
         return when{
             successRate >= 0.0 && successRate < 12.5 -> Color.rgb(178, 24, 43)
