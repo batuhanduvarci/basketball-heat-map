@@ -3,4 +3,6 @@
 
     <string name="player_name_text">%s %s</string>
     <string name="success_rate_text">%.2f</string>
+
+    <string name="menu_options_switch_players_text">Switch Players</string>
 </resources>
