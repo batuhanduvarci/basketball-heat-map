@@ -5,7 +5,8 @@ import android.graphics.Color
 /**
  * Created by Batuhan Duvarci on 7.03.2021.
  */
-data class HoneyCombModel(
+data class HexagonModel(
+    val id: String,
     val positionX: Double,
     val positionY: Double,
     var density: Int = 0,
