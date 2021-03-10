@@ -47,6 +47,13 @@ class MainActivity : AppCompatActivity() {
         mainActivityViewModel.honeyCombList.observe(this, {
             drawHexagon(it)
         })
+
+        mainActivityViewModel.isLoading.observe(this, {
+            when(it){
+                true -> showLoading(supportFragmentManager)
+                false -> hideLoading(supportFragmentManager)
+            }
+        })
     }
 
     private fun drawHexagon(honeyCombModelList : ArrayList<HoneyCombModel>) {
