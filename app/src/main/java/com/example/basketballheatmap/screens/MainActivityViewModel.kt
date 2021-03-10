@@ -19,21 +19,21 @@ import kotlinx.coroutines.launch
  */
 @ActivityScoped
 class MainActivityViewModel : ViewModel() {
-    private lateinit var shotsResponseModel : ShotsResponseModel
+    private lateinit var shotsResponseModel: ShotsResponseModel
 
     private var _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> get() = _isLoading
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     private var _hexagonList = MutableLiveData<ArrayList<HexagonModel>>()
-    val hexagonList : LiveData<ArrayList<HexagonModel>> get() = _hexagonList
+    val hexagonList: LiveData<ArrayList<HexagonModel>> get() = _hexagonList
 
     private var _userData = MutableLiveData<UserModel>()
-    val userData : LiveData<UserModel> get() = _userData
+    val userData: LiveData<UserModel> get() = _userData
 
     private var _successRate = MutableLiveData<Double>()
-    val successRate : LiveData<Double> get() = _successRate
+    val successRate: LiveData<Double> get() = _successRate
 
-    fun getShotsData(player : Int){
+    fun getShotsData(player: Int) {
         viewModelScope.launch {
             _isLoading.value = true
             shotsResponseModel = ServiceInstance.serviceApiInstance.getShots()
@@ -44,7 +44,7 @@ class MainActivityViewModel : ViewModel() {
 
     private fun calculateCells(shotsData: List<ShotModel>) {
         viewModelScope.launch {
-            for (shot in shotsData){
+            for (shot in shotsData) {
                 CellUtils.calculateCoordinates(shot)
             }
             CellUtils.calculateHexagonDensity()

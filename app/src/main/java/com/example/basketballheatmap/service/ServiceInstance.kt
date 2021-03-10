@@ -12,7 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ServiceInstance {
     companion object {
         private val httpLoggingInterceptor = HttpLoggingInterceptor().setLevel(
-            HttpLoggingInterceptor.Level.BODY)
+            HttpLoggingInterceptor.Level.BODY
+        )
         private val client = OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
         private val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())

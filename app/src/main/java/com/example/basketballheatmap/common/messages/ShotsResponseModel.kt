@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Batuhan Duvarci on 7.03.2021.
  */
-data  class ShotsResponseModel(
+data class ShotsResponseModel(
     @SerializedName("success") val success: Boolean,
     @SerializedName("data") val data: List<DataModel>
 )

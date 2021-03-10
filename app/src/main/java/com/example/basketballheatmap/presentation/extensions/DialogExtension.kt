@@ -3,7 +3,7 @@ package com.example.basketballheatmap.presentation.extensions
 import androidx.fragment.app.FragmentManager
 import com.example.basketballheatmap.presentation.dialogs.ProgressDialogFragment
 
-fun showLoading(fragmentManager : FragmentManager) {
+fun showLoading(fragmentManager: FragmentManager) {
     val progressDialogFragment = ProgressDialogFragment().newInstance()
 
     fragmentManager.beginTransaction()
@@ -12,7 +12,8 @@ fun showLoading(fragmentManager : FragmentManager) {
     progressDialogFragment.show(fragmentManager, "progressDialog")
 }
 
-fun hideLoading(fragmentManager: FragmentManager){
-    val progressDialogFragment = fragmentManager.findFragmentByTag("progressDialog") as ProgressDialogFragment?
+fun hideLoading(fragmentManager: FragmentManager) {
+    val progressDialogFragment =
+        fragmentManager.findFragmentByTag("progressDialog") as ProgressDialogFragment?
     progressDialogFragment?.dismiss()
 }

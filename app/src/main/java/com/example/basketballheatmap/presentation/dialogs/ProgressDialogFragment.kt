@@ -11,9 +11,9 @@ import com.example.basketballheatmap.R
 
 class ProgressDialogFragment : DialogFragment() {
 
-    fun newInstance() : ProgressDialogFragment{
+    fun newInstance(): ProgressDialogFragment {
         val args = Bundle()
-        
+
         val fragment = ProgressDialogFragment()
         fragment.arguments = args
         return fragment

@@ -28,21 +28,28 @@ object CellUtils {
             else -> measuredPosY
         }
         if (scaledPosX in 0.0..imageWidth.toDouble()) {
-            hexagonModelList.add(HexagonModel(id = shot.id, positionX = scaledPosX, positionY = scaledPosY, inOut = shot.inOut))
+            hexagonModelList.add(
+                HexagonModel(
+                    id = shot.id,
+                    positionX = scaledPosX,
+                    positionY = scaledPosY,
+                    inOut = shot.inOut
+                )
+            )
         }
     }
 
     fun calculateHexagonDensity() {
         for (hexagon in hexagonModelList) {
-            for (hexagonToCompare in hexagonModelList){
-                if (hexagon.positionX == hexagonToCompare.positionX && hexagon.positionY == hexagonToCompare.positionY){
+            for (hexagonToCompare in hexagonModelList) {
+                if (hexagon.positionX == hexagonToCompare.positionX && hexagon.positionY == hexagonToCompare.positionY) {
                     hexagon.density++
                 }
             }
             //Bu fonksiyon birebir objeleri karşılaştırdığı için eksik sonuç verdi.Bu yüzden farklı yöntem kullandım
             //honeyComb.density = Collections.frequency(honeyCombModelList, honeyComb)
         }
-        for (hexagon in hexagonModelList){
+        for (hexagon in hexagonModelList) {
             hexagon.color = calculateColor(hexagon)
         }
     }
@@ -51,21 +58,21 @@ object CellUtils {
         val repeatingList = arrayListOf<HexagonModel>()
         var inCount = 0.0
 
-        for (hexagon in hexagonModelList){
-            if (hexagon.positionX == hexagonModel.positionX && hexagon.positionY == hexagonModel.positionY){
+        for (hexagon in hexagonModelList) {
+            if (hexagon.positionX == hexagonModel.positionX && hexagon.positionY == hexagonModel.positionY) {
                 repeatingList.add(hexagon)
             }
         }
 
-        for (hexagon in repeatingList){
-            if (hexagon.inOut){
+        for (hexagon in repeatingList) {
+            if (hexagon.inOut) {
                 inCount++
             }
         }
 
         val successRate = (inCount / hexagonModel.density).times(100)
 
-        return when{
+        return when {
             successRate >= 0.0 && successRate < 12.5 -> Color.rgb(178, 24, 43)
             successRate >= 12.5 && successRate < 25.0 -> Color.rgb(244, 109, 67)
             successRate >= 25.0 && successRate < 37.5 -> Color.rgb(253, 174, 97)

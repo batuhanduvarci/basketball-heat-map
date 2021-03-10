@@ -7,10 +7,10 @@ import com.example.basketballheatmap.common.models.ShotModel
  */
 object PlayerUtils {
 
-    fun calculateSuccessRate(shotsData : List<ShotModel>) : Double{
+    fun calculateSuccessRate(shotsData: List<ShotModel>): Double {
         var inCount = 0.0
-        for (shot in shotsData){
-            if (shot.inOut){
+        for (shot in shotsData) {
+            if (shot.inOut) {
                 inCount++
             }
         }
