@@ -47,9 +47,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.switchPlayers -> {
-                when(selectedPlayer){
+                when (selectedPlayer) {
                     1 -> {
                         selectedPlayer++
                     }
@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 binding.courtImageView.viewTreeObserver.removeOnPreDrawListener(this)
                 CellUtils.imageWidth = binding.courtImageView.measuredWidth
                 CellUtils.imageHeight = binding.courtImageView.measuredHeight
+                binding.circularSeekBar.layoutParams.width = binding.courtImageView.measuredWidth / 3
                 getShotsData()
                 return true
             }
@@ -81,22 +82,25 @@ class MainActivity : AppCompatActivity() {
         })
 
         mainActivityViewModel.userData.observe(this, {
-            binding.nameTextView.text = String.format(getString(R.string.player_name_text), it.name, it.surname)
+            binding.nameTextView.text =
+                String.format(getString(R.string.player_name_text), it.name, it.surname)
         })
 
         mainActivityViewModel.successRate.observe(this, {
-            binding.successRateTextView.text = String.format(getString(R.string.success_rate_text), it)
+            binding.successRateTextView.text =
+                String.format(getString(R.string.success_rate_text), it)
+            binding.circularSeekBar.progress = it.toFloat()
         })
 
         mainActivityViewModel.isLoading.observe(this, {
-            when(it){
+            when (it) {
                 true -> showLoading(supportFragmentManager)
                 false -> hideLoading(supportFragmentManager)
             }
         })
     }
 
-    private fun drawHexagon(hexagonModelList : ArrayList<HexagonModel>) {
+    private fun drawHexagon(hexagonModelList: ArrayList<HexagonModel>) {
         for (obj in hexagonModelList) {
             val hexagon = AppCompatImageView(this)
             when (obj.density) {
@@ -113,8 +117,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteHexagon(){
-        for (obj in hexagonViewList){
+    private fun deleteHexagon() {
+        for (obj in hexagonViewList) {
             binding.basketballFieldContainer.removeView(obj)
         }
     }

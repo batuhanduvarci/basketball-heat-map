@@ -9,10 +9,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/container"
@@ -24,37 +24,51 @@
                 android:id="@+id/basketballFieldContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/courtImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/court"
-                    android:adjustViewBounds="true"/>
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/court" />
             </RelativeLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/innerContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/nameTextView"
+                    style="@style/TitleStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
-                    tools:text="Player 1"
-                    style="@style/TitleStyle"
-                    android:layout_marginTop="16dp"/>
+                    tools:text="Player 1" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/successRateTextView"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    tools:text="87"
-                    style="@style/TitleStyle"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_height="wrap_content">
+
+                    <me.tankery.lib.circularseekbar.CircularSeekBar
+                        android:id="@+id/circularSeekBar"
+                        style="@style/CircularSeekBarStyle"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/successRateTextView"
+                        style="@style/TitleStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="16dp"
+                        tools:text="87" />
+                </RelativeLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
