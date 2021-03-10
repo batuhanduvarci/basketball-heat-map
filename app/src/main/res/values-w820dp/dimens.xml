@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="dimen_4">12dp</dimen>
+    <dimen name="dimen_8">24dp</dimen>
+    <dimen name="dimen_12">36dp</dimen>
+    <dimen name="dimen_16">48dp</dimen>
+    <dimen name="dimen_20">60dp</dimen>
+    <dimen name="dimen_24">72dp</dimen>
+
+    <!-- text sizes -->
+    <dimen name="text_size_20">56sp</dimen>
+
+</resources>
